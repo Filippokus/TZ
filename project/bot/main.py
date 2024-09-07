@@ -4,7 +4,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
-from handlers import start, message, buttons  # Импортируем обработчики
+from handlers.handlers import router
 
 # Загружаем переменные окружения из файла .env
 load_dotenv()
@@ -20,9 +20,7 @@ storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 
 # Регистрируем обработчики
-start.register_handlers(dp)
-message.register_handlers(dp)
-buttons.register_handlers(dp)
+dp.include_router(router)
 
 # Функция для запуска бота
 async def main():
