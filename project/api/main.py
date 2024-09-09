@@ -1,3 +1,5 @@
+import os
+
 import redis.asyncio as aioredis  # Импортируем через redis.asyncio для совместимости с новой версией
 from fastapi import FastAPI, HTTPException, status
 from datetime import datetime
@@ -7,6 +9,7 @@ from db import get_collection  # Импорт функции подключен�
 import logging
 import pytz
 import json
+from dotenv import load_dotenv
 
 app = FastAPI()
 
@@ -19,11 +22,15 @@ moscow_tz = pytz.timezone('Europe/Moscow')
 # Инициализация Redis
 redis = None
 
+load_dotenv()
+
+REDIS_PORT = os.getenv("REDIS_PORT", "6379")
+
 @app.on_event("startup")
 async def startup():
     global redis
     try:
-        redis = aioredis.from_url("redis://redis:6379", decode_responses=True)
+        redis = aioredis.from_url(f"redis://redis:{REDIS_PORT}", decode_responses=True)
         pong = await redis.ping()
         if pong:
             logging.info("Подключение к Redis успешно!")
@@ -57,7 +64,6 @@ async def get_messages():
     except Exception as e:
         logging.error(f"Ошибка при получении сообщений: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Ошибка при получении сообщений: {str(e)}")
-
 
 
 # Эндпоинт для добавления сообщения

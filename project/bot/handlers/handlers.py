@@ -76,7 +76,7 @@ async def process_read_messages(callback_query: types.CallbackQuery):
     # Формируем список сообщений для вывода
     message_text = "\n".join(
         [
-            f"{msg['username']} ({format_timestamp(msg['timestamp'])}): {msg['text']}"
+            f"@{msg['username']} ({format_timestamp(msg['timestamp'])}): {msg['text']}"
             for msg in messages
         ]
     )
@@ -122,7 +122,7 @@ async def process_next_page(callback_query: types.CallbackQuery):
     # Формируем текст с датой для каждой страницы
     message_text = "\n".join(
         [
-            f"{msg['username']} ({format_timestamp(msg['timestamp'])}): {msg['text']}"
+            f"@{msg['username']} ({format_timestamp(msg['timestamp'])}): {msg['text']}"
             for msg in messages
         ]
     )
@@ -155,7 +155,7 @@ async def process_prev_page(callback_query: types.CallbackQuery):
     # Формируем текст с датой для каждой страницы
     message_text = "\n".join(
         [
-            f"{msg['username']} ({format_timestamp(msg['timestamp'])}): {msg['text']}"
+            f"@{msg['username']} ({format_timestamp(msg['timestamp'])}): {msg['text']}"
             for msg in messages
         ]
     )
