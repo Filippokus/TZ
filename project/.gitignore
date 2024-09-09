@@ -1,28 +1,28 @@
-# Игнорируем файл .env с конфиденциальными данными
-.env
 
-# Игнорируем директории, создаваемые Python
+.env
+.idea/
+
 __pycache__/
 *.py[cod]
 *.pyo
 
-# Игнорируем виртуальное окружение Python (если используется)
+
 venv/
 .env/
 .venv/
 
-# Игнорируем данные Docker
+
 docker-compose.override.yml
 docker-compose.override.yaml
 docker-compose.override*
 
-# Игнорируем логи
+
 *.log
 
-# Игнорируем файлы и директории для сертификатов
+
 certbot/conf/
 certbot/www/
 
-# Игнорируем данные Redis и MongoDB (если сохраняются локально)
+
 redis-data/
 mongo-data/
